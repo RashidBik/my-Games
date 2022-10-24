@@ -49,6 +49,22 @@
             direction = newDirection;
         }
     };
+    
+    function foodMove() {
+        foodTop = Math.floor(Math.random() * 20) * 50;
+        foodLeft = Math.floor(Math.random() * 14) * 50;
+    };
+
+    function isGameOver() {
+        const snakeBodiesNoHead = snakeBodies.slice(1);
+        const snakeCollisions = snakeBodiesNoHead.filter(sb => isCollide(sb, snakeBodies[0]));
+
+        if (snakeCollisions.length > 0 ) {
+            return true;
+        }
+
+        return false;
+    }
 
     setInterval(() => {
         snakeBodies.pop();
@@ -66,7 +82,17 @@
         const newHead = {left, top};
         snakeBodies = [newHead, ...snakeBodies];
 
+        if (isCollide(newHead,{left: foodLeft, top: foodTop}) ) {
+            foodMove();   
+            snakeBodies = [...snakeBodies, snakeBodies[snakeBodies.length - 1]];     
+        }
+
+        if(isGameOver() ){
+            alert("Game Over");
+        }
+
     },200);
+
 </script>
 
 <main>
@@ -79,7 +105,7 @@
 <style>
     main {
         background: rgb(178, 176, 176);
-        width: 1000px;
-        height: 600px;
+        width: 100vw;
+        height: 100vh;
     }
 </style>
