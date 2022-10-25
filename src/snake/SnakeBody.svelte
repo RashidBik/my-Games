@@ -1,6 +1,6 @@
 <script>
-export let top = 19;
-export let left = 300;
+export let top = 50;
+export let left = 150;
 export let isHead;
 export let direction = "right";
 
@@ -21,6 +21,7 @@ export let direction = "right";
         position: absolute;
         width: 48px;
         height: 48px;
+        /* margin: 15px; */
         z-index: 3;
     }
 
