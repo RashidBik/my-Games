@@ -7,11 +7,58 @@
         grid[i] = new Array(col);
         for (let j = 0; j < col; j++) {
             grid[i][j] = {
-                bombs: false,
+                bomb: false,
                 revealed: false,
                 distance: 0
             }
             
         }
     }
+
+    for (let i = 0; i < bombs; i++) {
+        let x = Math.floor(Math.random()*row);
+        let y = Math.floor(Math.random()*col);
+        if (grid[x][y].bomb) {
+            i--;
+            continue;
+        }
+        grid[x][y].bomb = true;
+                
+    }
 </script>
+
+<style>
+    .game {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 400px;
+        height: 400px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .game > div {
+        width: 10%;
+        height: 10%;
+        text-align: center;
+        line-height: 40px;
+        border: 1px solid #111;
+        box-sizing: border-box;
+        cursor: pointer;
+    }
+    .game > div.bomb:before{
+        content: "";
+    }
+</style>
+
+<div class="game">
+    {#each grid as row, i}
+        {#each row as box}
+            <div class:bomb={box.bomb}>
+                {i}{j}
+            </div>
+        {/each}
+    {/each}
+</div>
