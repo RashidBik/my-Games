@@ -1,6 +1,7 @@
 <script>
     // import { Router, Route, Link } from "svelte-navigator";
     import SnakeApp from "./snake/SnakeApp.svelte";
+    import TicApp from "./tic-tac-toe/TicApp.svelte";
 
   
 </script>
@@ -8,6 +9,7 @@
 <main class="bg-red-900 w-[100vw] h-[620px]">
   <SnakeApp />
 </main>
+<TicApp/>
 
 
 <!-- <Router>

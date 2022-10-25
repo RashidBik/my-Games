@@ -58,6 +58,7 @@ const restart = () => {
     width: 100px;
     height: 100px;
     margin: 0px;
+    border: 1px solid red;
 }
 </style>
 
