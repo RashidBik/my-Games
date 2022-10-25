@@ -1,4 +1,5 @@
 <script>
+    let gameOver = false;
     let grid = [];
     let row = 10;
     let col = 10;
@@ -36,7 +37,7 @@
         for (let x = 0; x < 1; x++) {
             for (let y = 0; y <= 1; y++) {
                 try {
-                    if (grid[x+i][j+j].bomb) {
+                    if (grid[x+i][y+j].bomb) {
                         count++;
                     }
                 } catch (error) {
@@ -46,6 +47,42 @@
             
         }
         grid[i][j].distance = count;
+    }
+    for (let i = 0; i < row; i++) {
+        for (let j = 0; j < col; j++) {
+            countDistance(i,j);
+            
+        }
+        
+    }
+    const revealedBox = (i,j) => {
+        grid[i][j].revealed = true;
+        if (grid[i][j].bomb) {
+            gameOver = true;
+            for (let i = 0; i < row; i++) {
+                for (let j = 0; j < col; j++) {
+                    if (grid[i][j]) {
+                        grid[i][j].revealed = true;
+                    }
+            
+                }
+        
+            }
+        }
+            if (grid[i][j].distance == 0) {
+                for (let x = 0; x < 1; x++) {
+                    for (let y = 0; y <= 1; y++) {
+                        try {
+                            if (!grid[x+i][y+j].bomb && !grid[x+i][y+j].revealed ) {
+                                revealedBox(x+i, y+j); 
+                            }
+                        } catch (error) {
+                            console.log(error);
+                    }
+                }
+                
+            }   
+        }
     }
 </script>
 
@@ -79,17 +116,32 @@
         width: 20px;
         height: 20px;
         background: #111;
-        /* border: 1px solid black; */
         border-radius: 50%;
     }
-</style>
 
+    .game > div.revealed {
+        background: #ddd;
+    }
+</style>
+{#if gameOver}
+<h1>
+    Game Over
+</h1>
+    
+{/if}
 <div class="game">
     {#each grid as row, i}
         {#each row as box}
-            <div class:bomb={box.bomb}>
-                {i}{j}
-            </div>
+            {#if box.revealed}
+                <div class:bomb={box.bomb} class:revealed={box.revealed}>
+                   {#if box.distance > 0}
+                        {box.distance}
+                   {/if}
+                </div>
+            {:else}
+                <div on:click={()=>{revealedBox(i,j)}}>
+                </div>
+            {/if}          
         {/each}
     {/each}
 </div>

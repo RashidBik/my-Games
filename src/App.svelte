@@ -1,6 +1,7 @@
 <script>
     // import { Router, Route, Link } from "svelte-navigator";
-    import SnakeApp from "./snake/SnakeApp.svelte";
+    import MineApp from "./minesweeper/MineApp.svelte";
+import SnakeApp from "./snake/SnakeApp.svelte";
     import TicApp from "./tic-tac-toe/TicApp.svelte";
 
   
@@ -10,8 +11,8 @@
   <SnakeApp />
 </main>
 <TicApp/>
-
-
+<hr>
+<MineApp />
 <!-- <Router>
   <header>
     <h1>History</h1>
