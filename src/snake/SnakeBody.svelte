@@ -1,13 +1,12 @@
 <script>
-export let top = 50;
-export let left = 150;
-export let isHead;
-export let direction = "right";
-
-
+    export let top = 50;
+    export let left = 150;
+    export let isHead;
+    export let direction = "right";
 </script>
 
-<div style="left: {left}px; top: {top}px;" class="snake-body {direction}">
+<div style="left: {left}px; top: {top}px;" 
+    class="snake-body {direction}">
     {#if isHead}
         <div id="leftEye" class="eyes"></div>
         <div id="rightEye" class="eyes"></div>
@@ -21,7 +20,6 @@ export let direction = "right";
         position: absolute;
         width: 48px;
         height: 48px;
-        /* margin: 15px; */
         z-index: 3;
     }
 
@@ -53,5 +51,4 @@ export let direction = "right";
     .snake-body.down {
         transform: rotate(180deg);
     }
-
 </style>

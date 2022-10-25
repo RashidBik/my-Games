@@ -81,11 +81,11 @@
                 return "up";
             } else if (keyCode === 39){
             return "right";
-        }else if (keyCode === 37){
-            return "left";
-        }else if (keyCode === 40){
-            return "down";
-        }
+            }else if (keyCode === 37){
+                return "left";
+            }else if (keyCode === 40){
+                return "down";
+            }
         return false;
     };
     
@@ -131,8 +131,10 @@ $: myScore = (snakeBodies.length - 3) * 5;
     <Food {foodLeft} {foodTop}/>
     <Snake {snakeBodies} {direction} />
 </main>
-<span class="text-4xl text-yellow-400">Your Score: {myScore}</span>
-<!-- <span class="text-4xl text-yellow-400">Your Last Score: {highScore}</span> -->
+<div class="flex justify-between px-8 py-1  ">
+    <span class="text-4xl text-yellow-400">Your Score: {myScore}</span>
+    <button class="text-4xl text-gray-100 border px-4 rounded-lg">back</button>
+</div>
 
 <svelte:window on:keydown={onkeydown} />
 
