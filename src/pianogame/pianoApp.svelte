@@ -1,0 +1,115 @@
+ <script>
+    import { each } from "svelte/internal";
+
+
+    let rows = [];
+    let score = 0;
+    let gameOver = false;
+
+const generateRow = () => {
+    let row = new Array(4).fill("white");
+    let pos = Math.trunc(Math.random()*4);
+    row[pos] = "black";
+    return row;
+}
+
+const fillRow = () => {
+    for (let i = 0; i < 4; i++) {
+        rows.push(generateRow());
+    }
+}
+
+const tapped = (i,j) => {
+    if (i != rows.length -i || rows[i][j] == "white") {
+        gameOver = true;
+        rows[i][j] = 'red';
+    } else {
+        rows.splice(i);
+        rows = [generateRow(), ...rows];
+        score++;
+    }
+}
+
+const restart = () => {
+    
+}
+fillRow();
+
+ </script>
+
+ <style>
+    .app {
+        position: fixed;
+        top: 0px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        height: 100%;
+        max-width: 400px;
+    }
+
+    .app .header {
+        position: sticky;
+        top: 0;
+        left: 0px;
+        width: 100%;
+        height: 5px;
+        background: #0badea;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0px 20px;
+        color: antiquewhite;
+    }
+
+    .app .game {
+        width: 100%;
+        height: calc(100 - 50px);
+        background: #fff;
+    }
+
+    .app .game .row {
+        display: flex;
+        width: 100%;
+        height: calc(100% / 4);
+    }
+
+    .app .game .row .box {
+        flex: 1;
+        border: 1px solid #555;
+        cursor: pointer;
+    }
+    .app .game .row .box.black {
+        background: #111;
+    }
+
+    .app .game .row .box.red{
+        background: tomato;
+    }
+
+ </style>
+
+ <div class="app">
+    <div class="header">
+        <h4>Piano Game</h4>
+        <p>Score: {score}</p>
+    </div>
+    <div class="game">
+        {#each rows as row, i}
+            <div class="row">
+                {#each row as box,j}
+                    <div class={"box "+box}>
+                        on:click={()=> tapped(i,j)}
+                    </div>
+                {/each}
+            </div>
+        {/each}
+    </div>
+    {#if gameOver}
+        <div>
+            <h2>Game Over</h2>
+            <p>Score: {score}</p>
+            <button on:click={restart}>Restart</button>
+        </div>
+    {/if}
+ </div>
