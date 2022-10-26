@@ -3,47 +3,46 @@
     let score = 0;
     let gameOver = false;
 
-const generateRow = () => {
-    let row = new Array(4).fill("white");
-    let pos = Math.trunc(Math.random()*4);
-    row[pos] = "black";
-    return row;
-}
+    const generateRow = () => {
+        let row = new Array(4).fill("white");
+        let pos = Math.trunc(Math.random()*4);
+        row[pos] = "black";
+        return row;
+    };
+    
+    const fillRow = () => {
+        for (let i = 0; i < 4; i++) {
+            rows.push(generateRow());
+        }
+    };
 
-const fillRow = () => {
-    for (let i = 0; i < 4; i++) {
-        rows.push(generateRow());
-    }
-}
+    const tapped = (i,j) => {
+        if (i != rows.length -1 || rows[i][j] == "white") {
+            rows[i][j] = 'red';
+            setTimeout(() => {
+                gameOver = true;
+            },1000);
+        } else {
+            rows.splice(i);
+            rows = [generateRow(), ...rows];
+            score++;
+        }
+    };
 
-const tapped = (i,j) => {
-    if (i != rows.length -1 || rows[i][j] == "white") {
-        gameOver = true;
-        rows[i][j] = 'red';
-    } else {
-        rows.splice(i);
-        rows = [generateRow(), ...rows];
-        score++;
-    }
-}
-
-const restart = () => {
-    score = 0;
-    gameOver = false;
-    rows = [];
-    fillRow();
-}
+    const restart = () => {
+        score = 0;
+        gameOver = false;
+        rows = [];
+        fillRow();
+    };
 fillRow();
-
  </script>
 
  <style>
 
-
     .body {
         font-family: 'Courier New', Courier, monospace;
         min-height: 100vh;
-        /* background: linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.85)); */
         margin: 0;
         padding: 0;
         box-sizing: border-box;
@@ -96,6 +95,7 @@ fillRow();
     .app .game .row .box.red{
         animation: blinkRed 500ms ease-in-out infinite;
     }
+
     @keyframes blinkRed {
         0%,100% {
             background: #fff;
