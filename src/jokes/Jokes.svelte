@@ -1,7 +1,13 @@
 <script>
-
+    import Transation from "./Transation.svelte";
+    
+    export let joke;
 </script>
 
-<div>
-    Jokes......haha
-</div>
+<Transation>
+    <div>
+        {joke}
+        Jokes......haha
+        <button class="bg-gray-300">randomJoke</button>
+    </div>
+</Transation>
