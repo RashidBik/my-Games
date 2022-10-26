@@ -1,18 +1,20 @@
 <script>
     // import { Router, Route, Link } from "svelte-navigator";
     import MineApp from "./minesweeper/MineApp.svelte";
+    import PianoApp from "./pianogame/pianoApp.svelte";
 import SnakeApp from "./snake/SnakeApp.svelte";
     import TicApp from "./tic-tac-toe/TicApp.svelte";
 
   
 </script>
 
-<main class="bg-red-900 w-[100vw] h-[620px]">
-  <SnakeApp />
-</main>
-<TicApp/>
-<hr>
-<MineApp />
+<!-- <main class="bg-red-900 w-[100vw] h-[620px]"> -->
+  <!-- <SnakeApp /> -->
+<!-- </main> -->
+<!-- <TicApp/> -->
+<!-- <hr> -->
+<!-- <MineApp /> -->
+<PianoApp />
 <!-- <Router>
   <header>
     <h1>History</h1>

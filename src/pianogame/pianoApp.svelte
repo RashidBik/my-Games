@@ -1,7 +1,4 @@
  <script>
-    import { each } from "svelte/internal";
-
-
     let rows = [];
     let score = 0;
     let gameOver = false;
@@ -20,7 +17,7 @@ const fillRow = () => {
 }
 
 const tapped = (i,j) => {
-    if (i != rows.length -i || rows[i][j] == "white") {
+    if (i != rows.length -1 || rows[i][j] == "white") {
         gameOver = true;
         rows[i][j] = 'red';
     } else {
@@ -41,6 +38,16 @@ fillRow();
  </script>
 
  <style>
+
+
+    .body {
+        font-family: 'Courier New', Courier, monospace;
+        min-height: 100vh;
+        /* background: linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.85)); */
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
     .app {
         position: fixed;
         top: 0px;
@@ -51,12 +58,12 @@ fillRow();
         max-width: 400px;
     }
 
-    .app .header {
+    .header {
         position: sticky;
         top: 0;
         left: 0px;
         width: 100%;
-        height: 5px;
+        height: 50px;
         background: #0badea;
         display: flex;
         justify-content: space-between;
@@ -67,7 +74,7 @@ fillRow();
 
     .app .game {
         width: 100%;
-        height: calc(100 - 50px);
+        height: calc(100% - 50px);
         background: #fff;
     }
 
@@ -87,7 +94,15 @@ fillRow();
     }
 
     .app .game .row .box.red{
-        background: tomato;
+        animation: blinkRed 500ms ease-in-out infinite;
+    }
+    @keyframes blinkRed {
+        0%,100% {
+            background: #fff;
+        }
+        50% {
+            background: tomato;
+        }
     }
 
     .result {
@@ -127,28 +142,30 @@ fillRow();
     }
 
  </style>
-
- <div class="app">
-    <div class="header">
-        <h4>Piano Game</h4>
-        <p>Score: {score}</p>
-    </div>
-    <div class="game">
-        {#each rows as row, i}
+    
+<main class="body" >
+    <div class="app">
+        <div class="header">
+            <h4>Piano Game</h4>
+            <p>Score: {score}</p>
+        </div>
+        <div class="game">
+            {#each rows as row, i}
             <div class="row">
                 {#each row as box,j}
-                    <div class={"box "+box}>
-                        on:click={()=> tapped(i,j)}
-                    </div>
+                <button class={"box "+box}
+                on:click={()=> tapped(i,j)}>
+                    </button>
                 {/each}
             </div>
-        {/each}
-    </div>
-    {#if gameOver}
-        <div>
+            {/each}
+        </div>
+        {#if gameOver}
+        <div class="result">
             <h2>Game Over</h2>
             <p>Score: {score}</p>
             <button on:click={restart}>Restart</button>
         </div>
-    {/if}
- </div>
+        {/if}
+    </div>
+</main>
