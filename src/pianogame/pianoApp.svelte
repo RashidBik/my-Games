@@ -31,7 +31,10 @@ const tapped = (i,j) => {
 }
 
 const restart = () => {
-    
+    score = 0;
+    gameOver = false;
+    rows = [];
+    fillRow();
 }
 fillRow();
 
@@ -85,6 +88,42 @@ fillRow();
 
     .app .game .row .box.red{
         background: tomato;
+    }
+
+    .result {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .result h2 {
+        font-size: 40px;
+        color: #fff;
+    }
+
+    .result p {
+        font-size: 20px;
+        margin-bottom: 10px;
+        color: #eee;
+    }
+
+    .result button {
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 10px;
+        border: 2px solid #fff;
+        color: #fff;
+        outline: none;
+        font-weight: 600;
+        background: transparent ;
     }
 
  </style>
